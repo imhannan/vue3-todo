@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply box-border;
+}
+html {
+  @apply scroll-smooth;
+}
+body {
+  @apply bg-primary;
+}
+
+@layer components {
+  .main {
+    @apply max-w-sm md:max-w-md lg:max-w-lg mx-auto;
+  }
+}
