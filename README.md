@@ -1,6 +1,6 @@
 # vue3-todo
 
-Live version of this app can be found [here](https://imhannan.netlify.app).
+Live version of this app can be found [here](https://vu3-todo.netlify.app).
 
 ## Recommended IDE Setup
 
@@ -10,7 +10,7 @@ Live version of this app can be found [here](https://imhannan.netlify.app).
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+## Just Clone this project and run
 
 ```sh
 npm install
