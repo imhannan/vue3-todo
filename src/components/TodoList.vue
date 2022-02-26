@@ -55,18 +55,18 @@ import type { Todo } from '@/types/todo'
 const todos: Ref<Todo[]> = ref([])
 const activeTab: Ref<string> = ref('all')
 
-const completedTodos = computed(() => {
+const completedTodos = computed<Todo[]>(() => {
   return todos.value.filter((todo: Todo) => todo.completed)
 })
-const pendingTodos = computed(() => {
+const pendingTodos = computed<Todo[]>(() => {
   return todos.value.filter((todo: Todo) => !todo.completed)
 })
 
-function todoAdd(todo: Todo) {
+function todoAdd(todo: Todo): void {
   todos.value.push(todo)
 }
 
-function filterTodos(tab: string) {
+function filterTodos(tab: string): void {
   activeTab.value = tab
 }
 
