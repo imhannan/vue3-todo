@@ -1,67 +1,58 @@
 <template>
   <section class="flex justify-between space-x-2">
     <button
-      @click="filter('all')"
       class="group flex justify-center grow items-center space-x-2 p-1 md:p-2 rounded-md"
       :class="{ 'bg-primary': activeTab === 'all' }"
+      @click="filter('all')"
     >
-      <span :class="{ 'text-white': activeTab === 'all' }">All</span
-      ><span
+      <span :class="{ 'text-white': activeTab === 'all' }">All</span><span
         class="bg-blue-200 text-black inline-block p-1 text-xs rounded-full"
-        >{{ todosCount }}</span
-      >
+      >{{ todosCount }}</span>
     </button>
     <button
-      @click="filter('pending')"
       class="group flex justify-center grow items-center space-x-2 p-1 md:p-2 rounded-md"
       :class="{ 'bg-primary': activeTab === 'pending' }"
+      @click="filter('pending')"
     >
-      <span :class="{ 'text-white': activeTab === 'pending' }">Pending</span
-      ><span
+      <span :class="{ 'text-white': activeTab === 'pending' }">Pending</span><span
         class="bg-yellow-300 text-white inline-block p-1 text-xs rounded-full"
-        >{{ pendingCount }}</span
-      >
+      >{{ pendingCount }}</span>
     </button>
     <button
-      @click="filter('completed')"
       class="group flex justify-center grow items-center space-x-2 p-1 md:p-2 rounded-md"
       :class="{ 'bg-primary': activeTab === 'completed' }"
+      @click="filter('completed')"
     >
-      <span :class="{ 'text-white': activeTab === 'completed' }">Completed</span
-      ><span
+      <span :class="{ 'text-white': activeTab === 'completed' }">Completed</span><span
         class="bg-green-500 text-white inline-block p-1 text-xs rounded-full"
-        >{{ completedCount }}</span
-      >
+      >{{ completedCount }}</span>
     </button>
   </section>
 </template>
-<script setup>
-import { computed } from "vue";
-const props = defineProps({
-  todos: {
-    type: Array,
-    required: true,
-  },
-  activeTab: {
-    type: String,
-    required: true,
-  },
-});
-const emit = defineEmits(["filtered"]);
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { Todo } from '@/types/todo'
+const props = defineProps<Props>()
 
-const todosCount = computed(() => {
-  return props.todos.length;
-});
+interface Props {
+  todos: Todo[]
+  activeTab: string
+}
+const emit = defineEmits<{ (e: 'filtered', type: string): void }>()
 
-const pendingCount = computed(() => {
-  return props.todos.filter((todo) => !todo.completed).length;
-});
+const todosCount = computed<number>(() => {
+  return props.todos.length
+})
 
-const completedCount = computed(() => {
-  return props.todos.filter((todo) => todo.completed).length;
-});
+const pendingCount = computed<number>(() => {
+  return props.todos.filter(todo => !todo.completed).length
+})
 
-function filter(type) {
-  emit("filtered", type);
+const completedCount = computed<number>(() => {
+  return props.todos.filter(todo => todo.completed).length
+})
+
+function filter(type: string) {
+  emit('filtered', type)
 }
 </script>
